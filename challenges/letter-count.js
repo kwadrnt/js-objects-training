@@ -31,3 +31,33 @@
 */
 
 // YOUR CODE HERE
+function letterCount (phrase) {
+  var objResult = {};
+
+  var splitPhrase = phrase.split("");
+  
+
+  for (var i = 0; i < splitPhrase.length; i++) {
+    if (objResult[i]) {
+      objResult[i] += 1; 
+    
+    }
+      else {
+    objResult[i] = 1;
+      
+  }
+
+  
+
+}
+return objResult();
+};
+
+
+
+
+
+
+
+
+
