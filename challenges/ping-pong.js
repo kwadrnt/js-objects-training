@@ -42,12 +42,16 @@ function pingPong(table) {
   // This use of findIndex returns the first index of a "truthy" data structure (i.e. not null)
   // That is, it finds the index of the pingpong within the table object.
   var objectIndex = table.findIndex(function(el) {
+    // !!el turns element into a boolean: with two options true or false
     return !!el;
   });
   var object = table[objectIndex];
   // Move right when the step count/(table length - 1) rounded down is an even number
   // Example, when the table is size 4 and step count is equal to 8, floor(8/3) is 2. 
   // 2 % 2 = 0, so we'll move right.
+  // math.floor rounds number down of (object steps number) / 3  which will be
+  // between 0-1 and return 1 then 1%2 === 0 is false so now move left.
+  // -1 is taking 3 steps from 4 positions on the table so 4-3 is -1 or subtracting 1
   if (Math.floor(object.steps/(table.length-1)) % 2 === 0) {
     // moving right
     table[objectIndex + 1] = object;
