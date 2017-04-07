@@ -38,3 +38,46 @@
 */
 
 // YOUR CODE HERE
+function pingPong(table) {
+  // This use of findIndex returns the first index of a "truthy" data structure (i.e. not null)
+  // That is, it finds the index of the pingpong within the table object.
+  var objectIndex = table.findIndex(function(el) {
+    return !!el;
+  });
+  var object = table[objectIndex];
+  // Move right when the step count/(table length - 1) rounded down is an even number
+  // Example, when the table is size 4 and step count is equal to 8, floor(8/3) is 2. 
+  // 2 % 2 = 0, so we'll move right.
+  if (Math.floor(object.steps/(table.length-1)) % 2 === 0) {
+    // moving right
+    table[objectIndex + 1] = object;
+  } else {
+    // moving left
+    table[objectIndex - 1] = object;
+  }
+  object.steps += 1;
+  table[objectIndex] = null;
+  return table;
+}
+
+// --------------- STRETCH #2 (set the 'speed') ---------------
+
+function pingPong(table, speed) {
+  var objectIndex = table.findIndex(function(el) {
+    return !!el;
+  });
+  var object = table[objectIndex];
+  // This loop runs as many times as the 'speed'
+  for (var i=0; i<speed; i++) {
+    if (Math.floor(object.steps/(table.length-1)) % 2 === 0) {
+      table[objectIndex + 1] = object;
+    } else {
+      table[objectIndex - 1] = object;
+    }
+    object.steps += 1;
+    table[objectIndex] = null;
+  }
+  return table;
+}
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help

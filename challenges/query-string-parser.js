@@ -44,4 +44,28 @@
 
 */
 
-// YOUR CODE HERE
+// --------------- Solution ---------------
+function parseQueryString(string) {
+  var pairs = string.split("&");
+  var output = {};
+  pairs.forEach(function(el) {
+    var set = el.split("=");
+    output[set[0]] = set[1];
+  });
+  return output;
+}
+
+// --------------- Bonus ---------------
+function convertToQueryParameter(object) {
+  var output = "";
+  // Get an array of all keys in the object
+  var keys = Object.keys(object);
+  // Create an array to store the key/value pairs
+  var pairArr =[];
+  keys.forEach(function(el) {
+    // Create and store a string in the format key=value
+    pairArr.push(el + "=" + object[el]);
+  });
+  // Return a string created by joining all of the pairs with an '&' between each
+  return (pairArr.join("&"));
+}

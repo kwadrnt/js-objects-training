@@ -55,6 +55,7 @@ function formatDate(dateString) {
   var todaysDate = (today.getDate());
   var todaysYear = (today.getFullYear());
   // If the month is in the future or it's the current month and the date hasn't happened
+  // parseInt takes a string and turns into a number or integer
   if ((parseInt(dateArr[0]) > parseInt(todaysMonth)) || ((parseInt(dateArr[0]) === parseInt(todaysMonth)) && (parseInt(dateArr[1]) > parseInt(todaysDate))) ) {
     dateArr[2] = todaysYear;
     // If the month has already happened or it's the current month and the date already happened
