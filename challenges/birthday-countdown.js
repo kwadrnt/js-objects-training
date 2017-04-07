@@ -33,4 +33,76 @@
 
 */
 
-// YOUR CODE HERE
+// --------------- Solution ---------------
+
+// Finds the number of days between now and a date in the future
+function daysUntilDate(string) {
+  // Date.parse will take in any parameter or how a date is written and parses it into milliseconds
+  // to be read and used by the computer
+  var date = Date.parse(string);
+  var today = Date.now();
+  // will return a value of days until the date or birthday
+  return ((date - today)/(1000*60*60*24));
+}
+
+// Helper method that creates a string with the next instance of the birthday
+// This sets the correct year for birthdays that have already passed this year
+function formatDate(dateString) {
+  // This is where the current date is determined, so it is "future proofed"
+  var today = new Date();
+  var dateArr = dateString.split("/");
+  var todaysMonth = (today.getMonth() + 1);
+  var todaysDate = (today.getDate());
+  var todaysYear = (today.getFullYear());
+  // If the month is in the future or it's the current month and the date hasn't happened
+  if ((parseInt(dateArr[0]) > parseInt(todaysMonth)) || ((parseInt(dateArr[0]) === parseInt(todaysMonth)) && (parseInt(dateArr[1]) > parseInt(todaysDate))) ) {
+    dateArr[2] = todaysYear;
+    // If the month has already happened or it's the current month and the date already happened
+  } else {
+    dateArr[2] = todaysYear+1;
+  }
+  return dateArr.join("/");
+}
+
+function birthdayReminder(birthdays) {
+  var output = [];
+  birthdays.forEach(function(el) {
+    var birthdayString = formatDate(el.dob);
+    var daysUntil = daysUntilDate(birthdayString);
+    output.push(el.name + "'s birthday is in " + parseInt(daysUntil) + " days");
+  });
+  return output;
+}
+
+
+// --------------- With bonuses ---------------
+
+// (Uses the same helper methods as above)
+function birthdayReminder(birthdays) {
+  var output =[];
+  // Calculates the days until each person's birthday and creates a sentence
+  // Both values are added to the person object
+  birthdays.forEach(function(el) {
+    var birthdayString = formatDate(el.dob);
+    var daysUntil = daysUntilDate(birthdayString);
+    el.days = daysUntil;
+    el.sentence = el.name + "'s birthday is in " + parseInt(daysUntil) + " days";
+  });
+  // Sorts the birthday array by the 'days' key in each object
+  birthdays.sort(function (a,b){
+    if(a.days > b.days) {
+      return 1;
+    }
+    if (a.days < b.days) {
+      return -1;
+    }
+    return 0;
+  });
+  // Pushes the sentences into an array to be returned
+  birthdays.forEach(function(el) {
+    output.push(el.sentence);
+  });
+  return output;
+}
+
+// Note: ^this bonus code isn't very dry!

@@ -50,7 +50,7 @@ function letterCount (phrase) {
   
 
 }
-return objResult();
+  return objResult;
 };
 
 
